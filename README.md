@@ -50,20 +50,6 @@ The testbench follows a modular, class-based architecture with separate componen
                     +----------------------+
 ```
 
-## DUT
-
-The **OpenCores SPI controller IP** is used as the Design Under Test (DUT).
-
-The verification environment exercises the DUT through its:
-
-* Wishbone interface
-* SPI interface
-* SPI Control Register (`SPCR`)
-* SPI Extension Register (`SPER`)
-* Status and data registers
-* `SCK`, `MOSI`, and `MISO` signals
-* `ACK` response
-
 ## Verification Features
 
 ### Transaction-Based Verification
@@ -116,17 +102,7 @@ Coverage includes SPI configuration combinations such as:
 * SPI enable configuration
 * Different SPI control register values
 * Read/write transactions
-
-## Tools & Technologies
-
-* **SystemVerilog**
-* **SystemVerilog Assertions (SVA)**
-* **Functional Coverage**
-* **QuestaSim / ModelSim**
-* **OpenCores SPI IP**
-* **Wishbone Interface**
-* **Git**
-
+  
 ## Project Objective
 
 The objective of this project is to build a **complete reusable verification environment around an existing OpenCores SPI IP** and verify its functional behavior through transaction-based stimulus, monitoring, scoreboard checking, assertions, and functional coverage.
