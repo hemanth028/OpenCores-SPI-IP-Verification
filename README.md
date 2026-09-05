@@ -103,12 +103,14 @@ Coverage includes SPI configuration combinations such as:
 * Different SPI control register values
 * Read/write transactions
   
-##Python-Based Automation and Scripting
+## Python-Based Automation and Scripting
 
 Python scripting is utilized within the verification workflow to manage execution and analyze simulation data. Key capabilities include:
-Regression Automation: Scripts to run individual tests or batch simulation runs using different seed values and configurations.
-Log Parsing: Post-simulation log processing to scan for warnings, UVM/SystemVerilog errors, and test pass/fail status.
-Data Generation: Pre-generation of complex stimulus patterns or configuration matrices used by the testbench.
 
-##Project Objective
+* **Regression Automation:** Scripts to run individual tests or batch simulation runs using different seed values and configurations.
+* **Log Parsing:** Post-simulation log processing to scan for warnings, UVM/SystemVerilog errors, and test pass/fail status.
+* **Data Generation:** Pre-generation of complex stimulus patterns or configuration matrices used by the testbench.
+
+## Project Objective
+
 The objective of this project is to build a reusable verification environment around an existing OpenCores SPI IP and verify its functional behavior. This is achieved through transaction-based stimulus, monitoring, scoreboard checking, assertions, and functional coverage, supported by Python scripting for simulation automation and workflow efficiency.
