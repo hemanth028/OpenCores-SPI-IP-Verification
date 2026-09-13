@@ -22,9 +22,8 @@ module spi_sva (
     endclocking
 
 
-    //=========================================================
-    // 1. ACK MUST NOT REMAIN HIGH FOR TWO CONSECUTIVE CYCLES
-    //=========================================================
+    
+    //ACK MUST NOT REMAIN HIGH FOR TWO CONSECUTIVE CYCLES
 
     property ack_one_cycle;
         ack_o |=> !ack_o;
@@ -38,10 +37,8 @@ module spi_sva (
 		end
 
 
-    //=========================================================
-    // 2. WRITE ACCESS MUST EVENTUALLY GET ACK
-    //=========================================================
-
+    // WRITE ACCESS MUST EVENTUALLY GET ACK
+		
     property write_en_ack;
         (cyc_i && stb_i && we_i) |-> ##[0:2] ack_o;
     endproperty
@@ -53,11 +50,9 @@ module spi_sva (
 	end
 
 
-    //=========================================================
-    // 3. READ ACCESS MUST EVENTUALLY GET ACK
-    //=========================================================
-
-    property read_gets_ack;
+    // READ ACCESS MUST EVENTUALLY GET ACK
+    
+	property read_gets_ack;
         (cyc_i && stb_i && !we_i) |-> ##[0:2] ack_o;
     endproperty
 
@@ -68,20 +63,9 @@ module spi_sva (
 	end
 
 
-    //=========================================================
-    // 4. WHEN SPI IS DISABLED, SCK MUST BE LOW
-    //=========================================================
-    //
-    // DUT:
-    // wire spe = spcr[6];
-    //
-    // if (~spe)
-    //     sck_o <= #1 1'b0;
-    //
-    // Therefore use spcr[6] directly.
-    //=========================================================
+    // WHEN SPI IS DISABLED, SCK MUST BE LOW
 
-    property sck_low_when_disabled;
+	property sck_low_when_disabled;
         !spcr[6] |-> ((sck_o === 1'b0) or (sck_o===1'bx));
     endproperty
 
@@ -92,9 +76,7 @@ module spi_sva (
 		end
 
 
-    //=========================================================
-    // 5. WHEN SPI IS DISABLED, FSM MUST BE IDLE
-    //=========================================================
+    //WHEN SPI IS DISABLED, FSM MUST BE IDLE
 
     property fsm_idle_when_disabled;
         !spcr[6] |=>##[0:3] (state == 2'b00);
@@ -108,9 +90,9 @@ module spi_sva (
 
 		end
 
-    //=========================================================
-    // 6. READ DATA MUST NOT BE X/Z WHEN ACK IS HIGH
-    //=========================================================
+    
+    //READ DATA MUST NOT BE X/Z WHEN ACK IS HIGH
+		
 
     property read_data_known;
         (ack_o && !we_i) |-> !$isunknown(dat_o);
@@ -125,21 +107,6 @@ module spi_sva (
 
 		end
 
-    //=========================================================
-    // 7. SCK SHOULD NOT CHANGE IN STATE 01 WHEN ENA=0
-    //=========================================================
-    //
-    // DUT state 01:
-    //
-    // 2'b01:
-    //     if (ena) begin
-    //         sck_o <= ~sck_o;
-    //         state <= 2'b11;
-    //     end
-    //
-    // Therefore when ENA=0, SCK should remain unchanged.
-    //=========================================================
-
     property sck_stable_state01;
         (state == 2'b01 && !ena) |=> $stable(sck_o);
     endproperty
@@ -152,9 +119,9 @@ module spi_sva (
 
 		end
 
-    //=========================================================
-    // 8. STATE 01 + ENA SHOULD TOGGLE SCK
-    //=========================================================
+    
+    //STATE 01 + ENA SHOULD TOGGLE SCK
+    
 
     property sck_toggle_state01;
         (state == 2'b01 && ena) |=> (sck_o != $past(sck_o));
@@ -168,9 +135,8 @@ module spi_sva (
 		end
 
 
-    //=========================================================
-    // 9. STATE 11 + ENA SHOULD TOGGLE SCK
-    //=========================================================
+    
+    // STATE 11 + ENA SHOULD TOGGLE SCK
 
     property sck_toggle_state11;
         (state == 2'b11 && ena) |=> (sck_o != $past(sck_o));
@@ -182,21 +148,8 @@ module spi_sva (
         );
 			end
 
-    //=========================================================
-    // 10. WHEN TRANSFER FINISHES, FSM GOES IDLE
-    //=========================================================
-    //
-    // In DUT:
-    //
-    // if (~|bcnt) begin
-    //     state <= 2'b00;
-    //     sck_o <= cpol;
-    //     rfwe <= 1'b1;
-    // end
-    //
-    // This one requires bcnt, so add bcnt to the bind/module
-    // if you want to use it.
-    //=========================================================
+
+   
 
 
 endmodule
