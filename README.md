@@ -51,7 +51,13 @@ The testbench follows a modular, class-based architecture with separate componen
 ```
 
 ## Verification Features
+<img width="1647" height="545" alt="image" src="https://github.com/user-attachments/assets/c3f22731-4a7f-4abe-a314-fe2ca0bd6c19" />
 
+Reported verification achievements:
+
+100% functional coverage — all defined functional coverage bins were exercised.
+
+93.28% code coverage — reported code-coverage achievement for the project.
 ### Transaction-Based Verification
 
 SystemVerilog transaction classes are used to generate and transfer stimulus through the testbench components.
