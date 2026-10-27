@@ -58,7 +58,6 @@ Reported verification achievements:
 
 100% functional coverage — all defined functional coverage bins were exercised.
 
-93.28% code coverage — reported code-coverage achievement for the project.
 ### Transaction-Based Verification
 
 SystemVerilog transaction classes are used to generate and transfer stimulus through the testbench components.
