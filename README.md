@@ -51,7 +51,8 @@ The testbench follows a modular, class-based architecture with separate componen
 ```
 
 ## Verification Features
-<img width="1647" height="545" alt="image" src="https://github.com/user-attachments/assets/c3f22731-4a7f-4abe-a314-fe2ca0bd6c19" />
+<img width="1671" height="1226" alt="{D3F40662-DEFF-4A92-9E9C-9A552A08AA70}" src="https://github.com/user-attachments/assets/cb191eb9-52b3-4720-9aff-cbb3d1daebf3" />
+
 
 Reported verification achievements:
 
