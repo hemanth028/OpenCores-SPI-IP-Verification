@@ -88,26 +88,25 @@ A scoreboard compares the expected transaction data against the data observed fr
 
 ### SystemVerilog Assertions
 
-SVA is used to check important protocol and DUT behaviors, including:
+Nine concurrent assertions are bound to the DUT and check the following:
 
-* Wishbone `ACK` behavior
-* Read/write transaction responses
-* SPI enable/disable behavior
-* `SCK` behavior
-* FSM-related conditions
-* Validity of read data
+* `ack_one_cycle` — `ACK` is asserted for exactly one clock cycle per access.
+* `write_en_ack` — every Wishbone write receives an `ACK`.
+* `read_gets_ack` — every Wishbone read receives an `ACK`.
+* `read_data_known` — read data contains no `X`/`Z` when `ACK` is returned.
+* `sck_low_when_disabled` — `SCK` stays low while SPI is disabled.
+* `fsm_idle_when_disabled` — the FSM returns to idle when SPI is disabled.
+* `sck_stable_state01` — `SCK` holds its value in the first half of a clock period unless enabled.
+* `sck_toggle_state01` — `SCK` toggles in FSM state `01` on an enable tick.
+* `sck_toggle_state11` — `SCK` toggles in FSM state `11` on an enable tick, except for the final bit in CPHA=1 mode.
 
 ### Functional Coverage
 
-Functional coverage is included to ensure that important SPI configurations and transaction scenarios are exercised during verification.
+Functional coverage is implemented in three covergroups that exercise SPI configurations, register accesses, and FIFO conditions:
 
-Coverage includes SPI configuration combinations such as:
-
-* `CPOL`
-* `CPHA`
-* SPI enable configuration
-* Different SPI control register values
-* Read/write transactions
+* **Transaction coverage:** Wishbone address, read/write, `CPOL`, `CPHA`, `SPR`, and `SPRE`, with `CPOL` × `CPHA` and `CPOL` × `CPHA` × `SPR` crosses.
+* **Register access coverage:** SPCR, SPSR, data FIFO, and SPER read/write combinations, `SPIE` and `SPE` settings, `ICNT` values, SPSR flag-clear values, and the write/read FIFO full, empty, and collision flags.
+* **Clock-rate coverage:** `SPR` × `SPRE` cross sampled when data is pushed to the write FIFO.
   
 ## Python-Based Automation and Scripting
 
