@@ -115,7 +115,6 @@ Python scripting is utilized within the verification workflow to manage executio
 
 * **Regression Automation:** Scripts to run individual tests or batch simulation runs using different seed values and configurations.
 * **Log Parsing:** Post-simulation log processing to scan for warnings, UVM/SystemVerilog errors, and test pass/fail status.
-* **Data Generation:** Pre-generation of complex stimulus patterns or configuration matrices used by the testbench.
 
 ## Project Objective
 
