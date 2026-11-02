@@ -77,6 +77,14 @@ Reported verification achievements:
 |---|---|---|
 | `cyc_i & stb_i` | `cyc_i = 0` | It needs `stb_i` asserted without `cyc_i`. `STB_I` is only valid inside an active `CYC_I`, so this is not legal Wishbone. |
 | `((wb_acc & adr_i==2) & ack_o) & we_i` | `wb_acc = 0` | It needs `ack_o = 1` with no active request. The DUT generates `ack_o` only from `wb_acc` (`ack_o <= wb_acc & ~ack_o`), and a compliant master holds the request until `ack_o`. |
+
+ 
+ ### FSM Coverage
+<img width="912" height="213" alt="{BDC46818-AB4C-4634-AB0A-ACF01C14ED2F}" src="https://github.com/user-attachments/assets/262952c2-c62a-4bfe-9885-adc7fff0a93d" />
+
+| State / Transition | Reason |
+|---|---|
+| `st3` (`2'b10`) and `st3 -> st0` | No transition in the RTL ever enters state `2'b10`. The branch is only a safety net that returns the FSM to idle after an illegal state, so it is unreachable with legal stimulus. |
 ### Transaction-Based Verification
 
 SystemVerilog transaction classes are used to generate and transfer stimulus through the testbench components.
