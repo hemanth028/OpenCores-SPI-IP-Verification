@@ -58,7 +58,7 @@ Reported verification achievements:
 
 100% functional coverage — all defined functional coverage bins were exercised.
 
-### Reason for toggle coverage Gaps
+### Toggle coverage Gaps
 <img width="1837" height="654" alt="{A6C66B24-0352-4EC9-AF8E-B9CBBA1058AB}" src="https://github.com/user-attachments/assets/3a0389e1-8833-46dd-88d8-2dd9c0840f34" />
 
 | Signal | Reason |
