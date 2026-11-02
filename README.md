@@ -67,6 +67,15 @@ Reported verification achievements:
 | `rreg[7:0]` | The register is declared but never used in the RTL. |
 | `spsr[5:4]` | These status bits are tied to 0 (`assign spsr[5:4] = 2'b00`). |
 
+###  Expression Coverage
+<img width="2978" height="382" alt="{3E058842-ABDB-4D2F-B146-E95DBE14E09F}" src="https://github.com/user-attachments/assets/76d74be7-6e99-4c74-938a-35e6ce799dc5" />
+<img width="3067" height="380" alt="image" src="https://github.com/user-attachments/assets/130e1a04-e338-4be3-a51a-d33d97cf14e1" />
+<img width="2993" height="313" alt="{26886467-4680-4C8F-B136-6B7A56D9EF84}" src="https://github.com/user-attachments/assets/289d0b7c-6425-4536-93da-b932d5968b84" />
+
+| Expression | Uncovered term | Reason |
+|---|---|---|
+| `cyc_i & stb_i` | `cyc_i = 0` | It needs `stb_i` asserted without `cyc_i`. `STB_I` is only valid inside an active `CYC_I`, so this is not legal Wishbone. |
+| `((wb_acc & adr_i==2) & ack_o) & we_i` | `wb_acc = 0` | It needs `ack_o = 1` with no active request. The DUT generates `ack_o` only from `wb_acc` (`ack_o <= wb_acc & ~ack_o`), and a compliant master holds the request until `ack_o`. |
 ### Transaction-Based Verification
 
 SystemVerilog transaction classes are used to generate and transfer stimulus through the testbench components.
