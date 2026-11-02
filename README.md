@@ -60,12 +60,11 @@ Reported verification achievements:
 
 ### Reason for toggle percentage
 <img width="1837" height="654" alt="{A6C66B24-0352-4EC9-AF8E-B9CBBA1058AB}" src="https://github.com/user-attachments/assets/3a0389e1-8833-46dd-88d8-2dd9c0840f34" />
-| Signal | Reason |
-|---|---|
-| `clkcnt[11]` | The largest clock divider is `0x7FF` (11 bits), so bit 11 is never used. |
-| `mstr`, `spcr[4]` | The master-mode bit is forced to 1 on reset and on every write (`spcr <= dat_i \| 8'h10`). |
-| `rreg[7:0]` | The register is declared but never used in the RTL. |
-| `spsr[5:4]` | These status bits are tied to 0 (`assign spsr[5:4] = 2'b00`). |
+Signal	Reason
+clkcnt[11]	The largest clock divider is 0x7FF (11 bits), so bit 11 is never used.
+mstr, spcr[4]	The master-mode bit is forced to 1 on reset and on every write (spcr <= dat_i \| 8'h10).
+rreg[7:0]	The register is declared but never used in the RTL.
+spsr[5:4]	These status bits are tied to 0 (assign spsr[5:4] = 2'b00).
 
 ###  Expression Coverage
 <img width="2978" height="382" alt="{3E058842-ABDB-4D2F-B146-E95DBE14E09F}" src="https://github.com/user-attachments/assets/76d74be7-6e99-4c74-938a-35e6ce799dc5" />
